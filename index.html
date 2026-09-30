@@ -7,9 +7,9 @@
     <title>Aplicación Producto</title>
 
      <!--BOOTSTRAP CDN:)-->
-    <link rel="stylesheet" href="https://bootswatch.com/5/cyborg/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
 </head>
+
 <body>
 
     <!--NAVEGACIÓN-->
@@ -30,32 +30,31 @@
                         <h4>Agrega un Producto</h4>
 
                     </div>
-                    <form id="formulario-producto" class="card-body">
+                    <form id="product-form" class="card-body">
                         <div class="form-group">
 
-                            <input type="text" id="name" placeholder="Nombre del Producto"
+                            <input type="text" id="nombre" placeholder="Nombre del Producto"
                             class="form-control">
                         </div>
                         <div class="form-group" >
-                            <input type="number" step="0.01" id="price" placeholder="Precio del Producto" 
+                            <input type="number" step="0.01" id="precio" placeholder="Precio del Producto" 
                             class="form-control">
                         </div>
                         <div class="form-group">
-                            <input type="number" id="year" min="2020" value="2026" max="2100" placeholder="Año del Producto" class="form-control">
+                            <input type="number" id="año" min="2020" value="2026" max="2100" placeholder="Año del Producto" class="form-control">
                         </div>
                         <input type="submit" value="Guardar" class="btn btn-primary btn-block">
                     </form>
                 </div>
             </div>
-
-
-            <div clas="col-md-8">
-                <div id="lista-productos"></div>
-                
-            </div>
+            <div id="lista-productos" class="col-md-8"></div>
+       
         
 
         </div>
     </div>
+
+    <script src="app.js"></script>
+    
 </body>
 </html>
