@@ -14,8 +14,8 @@ class UI {
     addProduct(producto){
 
         const listaProductos= document.getElementById('lista-productos');
-        const elemento= document.createElement('div');
-        elemento.innerHTML=`
+        const element= document.createElement('div');
+        element.innerHTML=`
         <div class="card text-center mb-4">
         <div class="card-body">
         <strong> Nombre del Producto </strong>: ${producto.nombre}
@@ -24,10 +24,16 @@ class UI {
         </div>
         </div>
         `;
-        listaProductos.appendChild(elemento);
+        listaProductos.appendChild(element);
+        
     
     }    
-    deleteProducto(){
+
+    resetForm(){
+        document.getElementById('product-form').reset();
+    }
+
+    deleteProduct(){
 
     }
 
@@ -45,6 +51,7 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     
     const ui= new UI();
     ui.addProduct(producto);
+    ui.resetForm();
 
     e.preventDefault();
 
