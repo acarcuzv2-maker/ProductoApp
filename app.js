@@ -37,7 +37,7 @@ class UI {
     deleteProduct(element){
         if(element.name === 'delete'){
             element.parentElement.parentElement.parentElement.remove();
-            this.showMessage('Producto Eliminado Correctamente', 'info')
+            this.showMessage('Producto eliminado correctamente', 'info')
         }
 
 
@@ -72,6 +72,10 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     const producto= new Producto(nombre, precio, año);
     
     const ui= new UI();
+
+    if(nombre ===''      || precio ==='' || año=== ''){
+        return ui.showMessage('Complete las secciones por favor', 'danger');
+    }
     ui.addProduct(producto);
     ui.resetForm();
     ui.showMessage('Agregaste un producto satisfactoriamente', "success");
