@@ -21,6 +21,7 @@ class UI {
         <strong> Nombre del Producto </strong>: ${producto.nombre}
         <strong> Precio del Producto </strong>: ${producto.precio}
         <strong> Año del Producto </strong>: ${producto.año}
+        <a href= "#" blass="btn btn--danger" name= "delete">Delete</a>
         </div>
         </div>
         `;
@@ -55,4 +56,8 @@ document.getElementById('product-form').addEventListener('submit', function(e){
 
     e.preventDefault();
 
+});
+
+document.getElementById('lista-productos').addEventListener('click', function(){
+    alert('deleting')
 });
