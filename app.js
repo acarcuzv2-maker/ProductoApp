@@ -37,6 +37,7 @@ class UI {
     deleteProduct(element){
         if(element.name === 'delete'){
             element.parentElement.parentElement.parentElement.remove();
+            this.showMessage('Producto Eliminado Correctamente', 'info')
         }
 
 
@@ -53,8 +54,11 @@ class UI {
             document.querySelector('.alert').remove();
 
         },3000  );
+
+        
         
     }
+        
 
 }
 
