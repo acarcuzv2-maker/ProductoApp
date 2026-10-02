@@ -34,15 +34,32 @@ class UI {
         document.getElementById('product-form').reset();
     }
 
-    deleteProduct(){
+    deleteProduct(element){
+        if(element.name === 'delete'){
+            element.parentElement.parentElement.parentElement.remove();
+        }
+
 
     }
 
-    showMessage(){
+    showMessage(message, cssClass ){
+        const div= document.createElement('div');
+        div.className= `alert alert-${cssClass} mt-2`;
+        div.appendChild(document.createTextNode(message));
+        const container= document.querySelector('.container');
+        const app= document.querySelector('#App');
+        container.insertBefore(div, app);
+        setTimeout(function (){
+            document.querySelector('.alert').remove();
 
+        },3000  );
+        
     }
 
 }
+
+
+
 
 document.getElementById('product-form').addEventListener('submit', function(e){
     const nombre = document.getElementById('nombre').value;
@@ -53,11 +70,19 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     const ui= new UI();
     ui.addProduct(producto);
     ui.resetForm();
+    ui.showMessage('Agregaste un producto satisfactoriamente', "success");
+
 
     e.preventDefault();
 
+
+    });
+
+
+    document.getElementById('lista-productos').addEventListener('click', function(e){
+        const ui= new UI();
+        ui.deleteProduct(e.target);
+
+
 });
 
-document.getElementById('lista-productos').addEventListener('click', function(){
-    alert('deleting')
-});
