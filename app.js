@@ -37,7 +37,7 @@ class UI {
     deleteProduct(element){
         if(element.name === 'delete'){
             element.parentElement.parentElement.parentElement.remove();
-            this.showMessage('Producto eliminado correctamente', 'info')
+            this.showMessage('Producto eliminado correctamente', 'info');
         }
 
 
@@ -47,12 +47,13 @@ class UI {
         const div= document.createElement('div');
         div.className= `alert alert-${cssClass} mt-2`;
         div.appendChild(document.createTextNode(message));
+
         const container= document.querySelector('.container');
         const app= document.querySelector('#App');
         container.insertBefore(div, app);
         setTimeout(function (){
             document.querySelector('.alert').remove();
-
+ 
         },3000  );
 
         
@@ -72,6 +73,7 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     const producto= new Producto(nombre, precio, año);
     
     const ui= new UI();
+        e.preventDefault();
 
     if(nombre ===''      || precio ==='' || año=== ''){
         return ui.showMessage('Complete las secciones por favor', 'danger');
@@ -81,13 +83,13 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     ui.showMessage('Agregaste un producto satisfactoriamente', "success");
 
 
-    e.preventDefault();
+
 
 
     });
 
 
-    document.getElementById('lista-productos').addEventListener('click', function(e){
+document.getElementById('lista-productos').addEventListener('click', function(e){
         const ui= new UI();
         ui.deleteProduct(e.target);
 
