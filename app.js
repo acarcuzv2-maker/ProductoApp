@@ -12,23 +12,24 @@ class Producto {
 
 class UI {
     addProduct(producto){
-
-        const listaProductos= document.getElementById('lista-productos');
-        const element= document.createElement('div');
-        element.innerHTML=`
-        <div class="card text-center mb-4">
-        <div class="card-body">
-        <strong> Nombre del Producto </strong>: ${producto.nombre}
-        <strong> Precio del Producto </strong>: ${producto.precio}
-        <strong> Año del Producto </strong>: ${producto.año}
-        <a href= "#" blass="btn btn--danger" name= "delete">Delete</a>
-        </div>
-        </div>
+        const listaProductos = document.getElementById('lista-productos');
+        const element = document.createElement('div');
+        element.innerHTML = `
+            <div class="card mb-3">
+                <div class="card-header d-flex justify-content-between align-items-center py-2">
+                    <strong style="color:#6c7a89; font-size:0.85rem;">${producto.nombre}</strong>
+                    <div class="d-flex align-items-center gap-2">
+                        <small class="text-muted">${producto.año}</small>
+                        <button type="button" class="btn-close btn-sm" name="delete" aria-label="Eliminar"></button>
+                    </div>
+                </div>
+                <div class="card-body py-2 small">
+                    Precio Q. ${producto.precio}
+                </div>
+            </div>
         `;
         listaProductos.appendChild(element);
-        
-    
-    }    
+    }
 
     resetForm(){
         document.getElementById('product-form').reset();
@@ -36,11 +37,9 @@ class UI {
 
     deleteProduct(element){
         if(element.name === 'delete'){
-            element.parentElement.parentElement.parentElement.remove();
+            element.closest('.card').parentElement.remove();
             this.showMessage('Producto eliminado correctamente', 'info');
         }
-
-
     }
 
     showMessage(message, cssClass ){
@@ -59,6 +58,25 @@ class UI {
         
         
     }
+
+    validateForm(){
+        let valido = true;
+        ['nombre', 'precio', 'año'].forEach(id => {
+            const input = document.getElementById(id);
+            const ok = input.value.trim() !== '';
+            input.classList.toggle('is-valid', ok);
+            input.classList.toggle('is-invalid', !ok);
+            if(!ok) valido = false;
+        });
+        return valido;
+    }
+
+    resetForm(){
+        const form = document.getElementById('product-form');
+        form.reset();
+        form.querySelectorAll('.is-valid, .is-invalid')
+            .forEach(input => input.classList.remove('is-valid', 'is-invalid'));
+    }
         
 
 }
@@ -67,26 +85,22 @@ class UI {
 
 
 document.getElementById('product-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    const ui = new UI();
+
+    if(!ui.validateForm()){
+        return;
+    }
+
     const nombre = document.getElementById('nombre').value;
     const precio = document.getElementById('precio').value;
     const año = document.getElementById('año').value;
-    const producto= new Producto(nombre, precio, año);
-    
-    const ui= new UI();
-        e.preventDefault();
+    const producto = new Producto(nombre, precio, año);
 
-    if(nombre ===''      || precio ==='' || año=== ''){
-        return ui.showMessage('Complete las secciones por favor', 'danger');
-    }
     ui.addProduct(producto);
     ui.resetForm();
-    ui.showMessage('Agregaste un producto satisfactoriamente', "success");
-
-
-
-
-
-    });
+    ui.showMessage('Agregaste un producto satisfactoriamente', 'success');
+});
 
 
 document.getElementById('lista-productos').addEventListener('click', function(e){
@@ -95,4 +109,3 @@ document.getElementById('lista-productos').addEventListener('click', function(e)
 
 
 });
-
